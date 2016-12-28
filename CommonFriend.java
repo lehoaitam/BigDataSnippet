@@ -118,8 +118,8 @@ public class CommonFriend extends Configured implements Tool {
     
     conf.setMapperClass(CFMapper.class); 
     conf.setReducerClass(CFReducer.class);
-    //conf.setNumMapTasks(1);
-    //conf.setNumReduceTasks(1);
+    conf.setNumMapTasks(1);
+    conf.setNumReduceTasks(1);
     
     List<String> other_args = new ArrayList<String>();
     for(int i=0; i < args.length; ++i) {
