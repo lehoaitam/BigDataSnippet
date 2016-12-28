@@ -86,8 +86,14 @@ public class CommonFriend extends Configured implements Tool {
       for(String[] friends: arr){
     	  Arrays.sort(friends);
     	  for(String friend: friends){
-    		  if(commonElements.contains(friend))
+    		  logReduce.info("inside: commonElements hash set:");
+    		  for(String strTemp: commonElements){
+    			  logReduce.info(strTemp + "-");
+    		  }
+    		  if(commonElements.contains(friend)){
+    			  logReduce.info("^^^^^^^detect success^^^^^^:" + friend);
     			  commonFriendStr += friend + " ";
+    		  }
     		  else
     			  commonElements.add(friend);
     	  }
@@ -117,6 +123,7 @@ public class CommonFriend extends Configured implements Tool {
     conf.setOutputValueClass(Text.class);
     
     conf.setMapperClass(CFMapper.class); 
+    //conf.setCombinerClass(CFReducer.class);
     conf.setReducerClass(CFReducer.class);
     conf.setNumMapTasks(1);
     conf.setNumReduceTasks(1);
@@ -155,7 +162,7 @@ public class CommonFriend extends Configured implements Tool {
   
   
   public static void main(String[] args) throws Exception {
-	System.out.println("Common friend searching ....");
+	System.out.println("Common friend searching 03....");
     int res = ToolRunner.run(new Configuration(), new CommonFriend(), args);
     
     System.exit(res);
